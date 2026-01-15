@@ -1,0 +1,16 @@
+SET enable_indexscan = OFF;
+SET enable_bitmapscan = OFF;
+
+-- EXPLAIN (ANALYZE, BUFFERS OFF)
+SELECT *
+FROM name_basics
+WHERE birth_year = 1990;
+
+SET enable_indexscan = ON;
+SET enable_bitmapscan = ON;
+
+
+=============
+
+// 2000001 because with header
+[System.IO.File]::ReadLines("C:\Users\ThinkPad\Downloads\for development\name.basics.tsv") | Select-Object -First 2000001 | Set-Content name.basics.2m.tsv
