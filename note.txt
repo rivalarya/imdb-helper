@@ -16,3 +16,9 @@ SET enable_indexonlyscan = ON;
 
 // 1000001 because with header
 [System.IO.File]::ReadLines("C:\Users\RIVAL\Downloads\imdb dataset\name.basics.tsv") | Select-Object -First 1000001 | Set-Content name.basics.1m.tsv
+
+=============
+FIX LINE 677884 di title.basics.1m.tsv because:
+COPY error: error: invalid input syntax for type boolean: "1996"
+where: 'COPY title_basics, line 677884, column is_adult: "1996"',
+solusi: buat fungsi escape value di migration script
