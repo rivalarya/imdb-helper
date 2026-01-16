@@ -2,8 +2,8 @@ const { Client } = require('pg');
 const client = new Client({
     user: 'postgres',
     host: 'localhost',
-    database: 'postgres',
-    password: 'rifall.osd',
+    database: 'imdb-performance-optimization',
+    password: 'rival',
     port: 5432,
 });
 

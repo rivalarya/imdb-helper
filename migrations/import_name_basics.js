@@ -11,7 +11,7 @@ async function run() {
         FROM STDIN WITH (FORMAT csv, HEADER true, DELIMITER E'\t')
     `;
 
-    const fileStream = fs.createReadStream('name.basics.2m.tsv');
+    const fileStream = fs.createReadStream('name.basics.1m.tsv');
 
     const transform = split(line => {
         const cols = line.split('\t');
