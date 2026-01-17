@@ -37,3 +37,42 @@ INSERT INTO title_ratings
     SELECT * FROM title_ratings_temp
     WHERE tconst IN (SELECT tconst FROM title_basics)
     ON CONFLICT (tconst) DO NOTHING
+
+====================
+-- Count total data from db
+SELECT 'genres' AS table_name, COUNT(id) AS row_count FROM genres
+UNION ALL
+SELECT 'name_basics', COUNT(nconst) FROM name_basics
+UNION ALL
+SELECT 'name_known_for_titles', COUNT(nconst) FROM name_known_for_titles
+UNION ALL
+SELECT 'name_primary_professions', COUNT(nconst) FROM name_primary_professions
+UNION ALL
+SELECT 'principal_categories', COUNT(id) FROM principal_categories
+UNION ALL
+SELECT 'professions', COUNT(id) FROM professions
+UNION ALL
+SELECT 'title_basics', COUNT(tconst) FROM title_basics
+UNION ALL
+SELECT 'title_genres', COUNT(tconst) FROM title_genres
+UNION ALL
+SELECT 'title_principals', COUNT(tconst) FROM title_principals
+UNION ALL
+SELECT 'title_ratings', COUNT(tconst) FROM title_ratings
+UNION ALL
+SELECT 'title_type', COUNT(id) FROM title_type
+
+-- Grand Total row
+UNION ALL
+SELECT 'TOTAL', 
+    (SELECT COUNT(id) FROM genres) +
+    (SELECT COUNT(nconst) FROM name_basics) +
+    (SELECT COUNT(nconst) FROM name_known_for_titles) +
+    (SELECT COUNT(nconst) FROM name_primary_professions) +
+    (SELECT COUNT(id) FROM principal_categories) +
+    (SELECT COUNT(id) FROM professions) +
+    (SELECT COUNT(tconst) FROM title_basics) +
+    (SELECT COUNT(tconst) FROM title_genres) +
+    (SELECT COUNT(tconst) FROM title_principals) +
+    (SELECT COUNT(tconst) FROM title_ratings) +
+    (SELECT COUNT(id) FROM title_type);
