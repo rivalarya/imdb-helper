@@ -22,3 +22,18 @@ FIX LINE 677884 di title.basics.1m.tsv because:
 COPY error: error: invalid input syntax for type boolean: "1996"
 where: 'COPY title_basics, line 677884, column is_adult: "1996"',
 solusi: buat fungsi escape value di migration script
+
+
+============
+i need to load all reviews to title_ratings_temp first and then only insert the review for tconst that exist in title_basics
+CREATE TABLE title_ratings_temp (
+    tconst TEXT PRIMARY KEY,
+    average_rating REAL,
+    num_votes INTEGER NOT NULL DEFAULT 0
+);
+
+// after COPY
+INSERT INTO title_ratings 
+    SELECT * FROM title_ratings_temp
+    WHERE tconst IN (SELECT tconst FROM title_basics)
+    ON CONFLICT (tconst) DO NOTHING
